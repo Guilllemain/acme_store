@@ -1,0 +1,15 @@
+{
+  "name": "acme",
+  "version": "1.0.0",
+  "description": "ACME online store",
+  "main": "index.php",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "laravel-mix": "^4.0.15",
+    "webpack": "^4.29.6"
+  }
+}
