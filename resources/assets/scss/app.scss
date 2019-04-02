@@ -1,0 +1,14 @@
+@import url(https://fonts.googleapis.com/css?family=Railway:300,400,600);
+
+@import '../bower/vendor/foundation-sites/assets/foundation.scss';
+
+@import '../bower/vendor/motion-ui/src/motion-ui.scss';
+
+@include motion-ui-animations;
+@include motion-ui-transitions;
+
+body {
+    margin: 0;
+    padding: 0;
+    font-size: 18px;
+}

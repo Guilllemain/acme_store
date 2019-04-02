@@ -7,3 +7,6 @@ if (!isset($_SESSION)) {
 
 // Load environment variables
 require_once __DIR__ . '/../app/config/_env.php';
+
+// Load routes
+require_once __DIR__ . '/../app/routing/routes.php';
