@@ -8,5 +8,6 @@ mix.sass('resources/assets/scss/app.scss', 'resources/assets/css')
     .scripts([
         'resources/assets/bower/vendor/jquery/dist/jquery.min.js',
         'resources/assets/bower/vendor/foundation-sites/dist/js/foundation.min.js',
-        'resources/assets/bower/vendor/slick-carousel/slick/slick.min.js'
+        'resources/assets/bower/vendor/slick-carousel/slick/slick.min.js',
+        'resources/assets/js/init.js'
     ], 'public/js/all.js');

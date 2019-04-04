@@ -1,6 +1,7 @@
 <?php
 
 use Philo\Blade\Blade;
+use Symfony\Component\VarDumper\VarDumper;
 
 function view($path, array $data = [])
 {
@@ -25,4 +26,15 @@ function make($filename, $data)
     ob_end_clean();
 
     return $content;
+}
+
+if (!function_exists('dd')) {
+    function dd(...$vars)
+    {
+        foreach ($vars as $v) {
+            VarDumper::dump($v);
+        }
+
+        die(1);
+    }
 }

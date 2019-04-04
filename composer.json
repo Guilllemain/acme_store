@@ -1,4 +1,6 @@
 {
+    "name": "acme/store",
+    "description": "Acme online store",
     "require": {
         "vlucas/phpdotenv": "^3.3",
         "altorouter/altorouter": "^1.2",
@@ -16,5 +18,9 @@
     },
     "config": {
         "optimize-autoloader": true
+    },
+    "require-dev": {
+        "symfony/var-dumper": "^4.2",
+        "filp/whoops": "^2.3"
     }
 }

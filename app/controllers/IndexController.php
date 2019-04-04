@@ -6,7 +6,7 @@ use App\Classes\Mail;
 
 class IndexController extends BaseController
 {
-    public function show()
+    public function index()
     {
         echo 'Home page controller';
         $mail = new Mail();
@@ -18,10 +18,6 @@ class IndexController extends BaseController
             'body' => 'Test email'
         ];
 
-        if ($mail->send($data)) {
-            echo 'mail sent successfully';
-        } else {
-            echo 'mail sending failed';
-        }
+        $mail->send($data);
     }
 }

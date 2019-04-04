@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
-    <title>Email</title>
+    <title>Errors</title>
 </head>
+
 <body>
-    email body : <?php echo $data ?>
+    <?php echo "Error : {$data}" ?>
 </body>
+
 </html>

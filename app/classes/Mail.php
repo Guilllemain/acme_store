@@ -10,19 +10,18 @@ class Mail
 
     public function __construct()
     {
-        $this->mail = new PHPMailer;
+        $this->mail = new PHPMailer(true);
         $this->setUp();
     }
 
     public function setUp()
     {
         $this->mail->isSMTP();
-        $this->mail->Mailer = 'smtp';
         $this->mail->SMTPAuth = true;
-        $this->mail->SMTPSecure = 'tls';
+        $this->mail->SMTPSecure = getenv('MAIL_ENCRYPTION');
 
-        $this->mail->Host = getenv('SMTP_HOST');
-        $this->mail->Port = getenv('SMTP_PORT');
+        $this->mail->Host = getenv('MAIL_HOST');
+        $this->mail->Port = getenv('MAIL_PORT');
 
         $environment = getenv('APP_ENV');
         if ($environment === 'local') {
@@ -30,15 +29,13 @@ class Mail
         }
 
         // auth info
-        $this->mail->Username = getenv('EMAIL_ADDRESS');
-        $this->mail->Password = getenv('EMAIL_PASSWORD');
+        $this->mail->Username = getenv('MAIL_USERNAME');
+        $this->mail->Password = getenv('MAIL_PASSWORD');
 
         $this->mail->isHTML(true);
-        $this->mail->SingleTo = true;
 
         // sender info
-        $this->mail->From = getenv('ADMIN_EMAIL');
-        $this->mail->FromName = getenv('APP_NAME');
+        $this->mail->setFrom(getenv('MAIL_ADMIN'), getenv('APP_NAME'));
     }
 
     public function send($data)
@@ -46,6 +43,6 @@ class Mail
         $this->mail->addAddress($data['to'], $data['name']);
         $this->mail->Subject = $data['subject'];
         $this->mail->Body = make($data['view'], ['data' => $data['body']]);
-        return $this->mail->send();
+        $this->mail->send();
     }
 }
