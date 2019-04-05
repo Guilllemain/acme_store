@@ -6,7 +6,6 @@
 <div class="dashboard">
     <div class="row expanded">
         <h2>Dashboard</h2>
-        {{$session}}
     </div>
 </div>
 @endsection
