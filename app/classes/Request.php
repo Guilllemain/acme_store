@@ -30,10 +30,11 @@ class Request
      * @param string $key
      * @return mixed
      */
-    public static function get(string $key)
+    public static function get(string $key, $is_array = false)
     {
         $object = new static;
-        $data = $object->all();
+        $data = $object->all($is_array);
+        if ($is_array) return $data[$key];
         return $data->$key;
     }
 

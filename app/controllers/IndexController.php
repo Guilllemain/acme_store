@@ -17,7 +17,5 @@ class IndexController extends BaseController
             'name' => 'John Doe',
             'body' => 'Test email'
         ];
-
-        $mail->send($data);
     }
 }

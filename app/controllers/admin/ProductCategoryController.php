@@ -20,9 +20,15 @@ class ProductCategoryController
     {
         if (!Request::has('post')) return;
 
-        $request = Request::get('post');
+        $request = Request::get('post', true);
         $validator = new ValidateRequest;
-        dd($validator->unique('name', $request->name, 'categories'));
+        $validator->validate($request, [
+            'name' => ['required' => true, 'unique' => 'categories']
+        ]);
+
+        if ($validator->hasError()) {
+            dd($validator->getErrorMessage());
+        }
 
         if (!CSRFToken::verifyCSRFToken($request->token)) {
             throw new Exception("Token mismatch");
