@@ -6,7 +6,9 @@
         "altorouter/altorouter": "^1.2",
         "philo/laravel-blade": "^3.1",
         "illuminate/database": "^5.8",
-        "phpmailer/phpmailer": "^6.0"
+        "phpmailer/phpmailer": "^6.0",
+        "nesbot/carbon": "^2.16",
+        "voku/pagination": "^3.0"
     },
     "autoload": {
         "files": [

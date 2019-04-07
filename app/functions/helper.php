@@ -2,6 +2,8 @@
 
 use Philo\Blade\Blade;
 use Symfony\Component\VarDumper\VarDumper;
+use voku\helper\Paginator;
+use Illuminate\Database\Capsule\Manager as Capsule;
 
 function view($path, array $data = [])
 {
@@ -37,4 +39,13 @@ if (!function_exists('dd')) {
 
         die(1);
     }
+}
+
+function paginate($num_of_records, $total_records, $table_name, $object) {
+    $pages = new Paginator($num_of_records, 'p');
+    $pages->set_total($total_records);
+    $data = Capsule::select("SELECT * FROM $table_name ORDER BY created_at DESC  " . $pages->get_limit());
+    $items = $object->transform($data);
+    
+    return [$items, $pages->page_links()]; 
 }

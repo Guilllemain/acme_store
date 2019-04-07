@@ -12,8 +12,10 @@ class ProductCategoryController
 {
     public function index()
     {
-        $categories = Category::all();
-        return view('admin.products.categories', compact('categories'));
+        $total = Category::all()->count();
+        $object = new Category();
+        list($categories, $links) = paginate(2 , $total, 'categories', $object); 
+        return view('admin.products.categories', compact('categories', links));
     }
 
     public function store()

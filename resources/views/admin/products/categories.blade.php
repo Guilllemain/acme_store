@@ -44,14 +44,14 @@
                 <tbody>
                     @foreach ($categories as $category)
                     <tr>
-                        <td>{{$category->id}}</td>
-                        <td>{{$category->name}}</td>
-                        <td>{{$category->created_at->toFormattedDateString()}}</td>
+                        <td>{{$category['id']}}</td>
+                        <td>{{$category['name']}}</td>
+                        <td>{{$category['added']}}</td>
                         <td width="100" class="text-right">
                             <a href="#">
                                 <i class="fas fa-edit"></i>
                             </a>
-                            <form action="/admin/products/categories/{{$category->id}}" method="POST">
+                            <form action="/admin/products/categories/{{$category['id']}}" method="POST">
                                 <input type="hidden" value="{{\App\Classes\CSRFToken::_token()}}">
                                 <button type="submit">
                                     <i class="fas fa-times"></i>
@@ -62,6 +62,7 @@
                     @endforeach
                 </tbody>
             </table>
+            {!! $links !!}
         </div>
     </div>
 </div>
