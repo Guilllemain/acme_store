@@ -128,7 +128,7 @@ class ValidateRequest
 
     public function hasError()
     {
-        return count(self::$error > 0) ? true : false;
+        return count(self::$error) > 0 ? true : false;
     }
 
     public function getErrorMessage()

@@ -22,7 +22,7 @@
         <div class="small-12 medium-8 cell">
             <form action="/admin/products/categories" method="POST">
                 <div class="input-group">
-                    <input type="hidden" value="{{\App\Classes\CSRFToken::_token()}}">
+                    <input type="hidden" name="token" value="{{\App\Classes\CSRFToken::_token()}}">
                     <input type="text" name="name" class="input-group-field" placeholder="Category name">
                     <input type="number" name="parent_id" class="input-group-field" value="0" placeholder="Parent id">
                     <div class="input-group-button">

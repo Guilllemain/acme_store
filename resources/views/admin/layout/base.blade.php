@@ -21,6 +21,7 @@
             <span class="title-bar-title">{{ getenv('APP_NAME') }}</span>
           </div>
         </div>
+        @include('partials.message')
         @yield('content')
     </div>
 </body>

@@ -10,30 +10,38 @@ use App\Classes\ValidateRequest;
 
 class ProductCategoryController
 {
-    public function index()
+    protected $categories;
+    protected $links;
+
+    public function __construct()
     {
         $total = Category::all()->count();
         $object = new Category();
-        list($categories, $links) = paginate(2 , $total, 'categories', $object); 
-        return view('admin.products.categories', compact('categories', links));
+        list($this->categories, $this->links) = paginate(2, $total, 'categories', $object);
+    }
+
+    public function index()
+    {   
+        return view('admin.products.categories', ['categories' => $this->categories, 'links' => $this->links]);
     }
 
     public function store()
     {
         if (!Request::has('post')) return;
 
-        $request = Request::get('post', true);
+        $request = Request::get('post');
         $validator = new ValidateRequest;
-        $validator->validate($request, [
+        $validator->validate($_POST, [
             'name' => ['required' => true, 'unique' => 'categories']
         ]);
 
         if ($validator->hasError()) {
-            dd($validator->getErrorMessage());
+            $errors = $validator->getErrorMessage();
+            return view('admin.products.categories', ['categories' => $this->categories, 'links' => $this->links, 'errors' => $errors]);
         }
 
         if (!CSRFToken::verifyCSRFToken($request->token)) {
-            throw new Exception("Token mismatch");
+            throw new \Exception("Token mismatch");
         }
 
         $name = $request->name;
@@ -44,8 +52,11 @@ class ProductCategoryController
             'slug' => strtolower(str_replace(' ', '-', $name)),
             'parent_id' => $parent_id
         ]);
+        $total = Category::all()->count();
+        $object = new Category();
+        list($this->categories, $this->links) = paginate(2, $total, 'categories', $object);
 
-        return Redirect::back();
+        return view( 'admin.products.categories', ['categories' => $this->categories, 'links' => $this->links, 'success' => 'Category created']);
     }
 
     public function destroy($category_id)
