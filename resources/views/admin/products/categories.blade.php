@@ -1,6 +1,7 @@
 @extends('admin.layout.base')
 
 @section('title', 'Product Category')
+@section('page-id', 'update-category')
 
 @section('content')
 <div class="dashboard">
@@ -48,7 +49,7 @@
                         <td>{{$category['name']}}</td>
                         <td>{{$category['added']}}</td>
                         <td width="100" class="text-right">
-                            <a href="#">
+                            <a data-open="item-{{$category['id']}}">
                                 <i class="fas fa-edit"></i>
                             </a>
                             <form action="/admin/products/categories/{{$category['id']}}" method="POST">
@@ -57,6 +58,18 @@
                                     <i class="fas fa-times"></i>
                                 </button>
                             </form>
+                            <div class="reveal" id="item-{{$category['id']}}" data-reveal>
+                              <h3>Edit category</h3>
+                              <form class="update-category" data-token="{{\App\Classes\CSRFToken::_token()}}" data-id="{{$category['id']}}">
+                                  <div class="input-group">
+                                        <input type="text" name="name" id="category-name" class="input-group-field" value="{{$category['name']}}">
+                                        <input type="number" name="parent_id" id="parent-category-id" class="input-group-field" value="">
+                                        <div class="input-group-button">
+                                            <button class="button" type="submit" >Update</button>
+                                        </div>
+                                  </div>
+                              </form>
+                            </div>
                         </td>
                     </tr>
                     @endforeach

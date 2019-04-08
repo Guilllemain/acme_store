@@ -59,6 +59,35 @@ class ProductCategoryController
         return view( 'admin.products.categories', ['categories' => $this->categories, 'links' => $this->links, 'success' => 'Category created']);
     }
 
+    public function update($id)
+    {
+        if (!Request::has('post')) return;
+
+        $request = Request::get('post');
+        $validator = new ValidateRequest;
+        $validator->validate($_POST, [
+            'name' => ['required' => true, 'unique' => 'categories']
+        ]);
+
+        if ($validator->hasError()) {
+            $errors = $validator->getErrorMessage();
+            header('Content-Type: application/json');
+            http_response_code(422);
+            echo json_encode($errors);
+            die();
+        }
+
+        if (!CSRFToken::verifyCSRFToken($request->token)) {
+            throw new \Exception("Token mismatch");
+        }
+
+        $name = $request->name;
+        $parentId = $request->parentId === '0' ? null : $request->parentId;
+
+        Category::where('id', $id)->update(['name' => $name]);
+        echo json_encode(['success' => 'Category updated']);
+    }
+
     public function destroy($category_id)
     {
         dd(Request::all());

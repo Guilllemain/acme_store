@@ -2,6 +2,8 @@
 
 namespace App\Classes;
 
+use App\Classes\Session;
+
 class Redirect
 {
     /**

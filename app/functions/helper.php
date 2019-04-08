@@ -4,6 +4,7 @@ use Philo\Blade\Blade;
 use Symfony\Component\VarDumper\VarDumper;
 use voku\helper\Paginator;
 use Illuminate\Database\Capsule\Manager as Capsule;
+use App\Classes\Session;
 
 function view($path, array $data = [])
 {
