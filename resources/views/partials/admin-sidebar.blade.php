@@ -1,13 +1,13 @@
-<div class="off-canvas position-left reveal-for-large nav" id="offCanvas" data-off-canvas>
+<div class="w-1/6 nav">
 
-    <h4>Welcome John</h4>
+    <h4 class="text-white font-light text-center">Welcome John</h4>
 
     <div class="image-holder">
         <img src="/images/profile.png" alt="admin" title="admin">
     </div>
     <p>John Doe</p>
 
-    <ul class="vertical menu">
+    <ul class="menu">
         <li>
             <a href="/admin">
                 <i class="fas fa-tachometer-alt" aria-hidden="true"></i><span>Dashboard</span>    

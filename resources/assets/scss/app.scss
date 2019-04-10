@@ -1,16 +1,31 @@
+@import 'tailwind';
+
 @import url('https://fonts.googleapis.com/css?family=Raleway:300,400,600');
 
-@import '../bower/vendor/foundation-sites/assets/foundation.scss';
-
 @import '../bower/vendor/motion-ui/src/motion-ui.scss';
+@import '~slick-carousel/slick/slick.css';
 
 @import 'admin/nav.scss';
+@import 'global';
 
 @include motion-ui-animations;
 @include motion-ui-transitions;
 
-body {
-    margin: 0;
+* {
+    margin : 0;
     padding: 0;
+}
+
+html, body {
+    min-height: 100%;
+    height: 100%;
+}
+
+#app {
     font-size: 18px;
+    height: 100%;
+}
+
+ul {
+    list-style: none;
 }

@@ -17,11 +17,11 @@ class ProductCategoryController
     {
         $total = Category::all()->count();
         $object = new Category();
-        list($this->categories, $this->links) = paginate(2, $total, 'categories', $object);
+        list($this->categories, $this->links) = paginate(20, $total, 'categories', $object);
     }
 
     public function index()
-    {   
+    {
         return view('admin.products.categories', ['categories' => $this->categories, 'links' => $this->links]);
     }
 
@@ -45,7 +45,7 @@ class ProductCategoryController
         }
 
         $name = $request->name;
-        $parent_id = $request->parent_id === '0' ? null : $request->parent_id;
+        $parent_id = $request->parent_id === 'NULL' ? null : $request->parent_id;
         
         Category::create([
             'name' => $name,
@@ -54,7 +54,7 @@ class ProductCategoryController
         ]);
         $total = Category::all()->count();
         $object = new Category();
-        list($this->categories, $this->links) = paginate(2, $total, 'categories', $object);
+        list($this->categories, $this->links) = paginate(20, $total, 'categories', $object);
 
         return view( 'admin.products.categories', ['categories' => $this->categories, 'links' => $this->links, 'success' => 'Category created']);
     }
@@ -83,13 +83,25 @@ class ProductCategoryController
 
         $name = $request->name;
         $parentId = $request->parentId === '0' ? null : $request->parentId;
-
-        Category::where('id', $id)->update(['name' => $name]);
+        Category::where('id', $id)->update([
+            'name' => $name,
+            'slug' => strtolower(str_replace(' ', '-', $name))
+        ]);
         echo json_encode(['success' => 'Category updated']);
     }
 
-    public function destroy($category_id)
+    public function destroy($id)
     {
-        dd(Request::all());
+        if (!Request::has('post')) return;
+
+        $request = Request::get('post');
+
+        if (!CSRFToken::verifyCSRFToken($request->token)) {
+            dd('error');
+            throw new \Exception("Token mismatch");
+        }
+
+        Category::destroy($id);
+        echo json_encode(['success' => 'Category destroyed']);
     }
 }

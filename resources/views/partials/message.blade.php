@@ -22,4 +22,9 @@
             </button>
         </div>
     @endisset
+
+    <div class="notifications callout" style="display: none" data-closable><button class="close-button" aria-label="Dismiss message" data-close>
+            <span arial-hidden="true">&times;</span>
+        </button>
+    </div>
 </div>

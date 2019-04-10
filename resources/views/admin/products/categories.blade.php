@@ -4,39 +4,47 @@
 @section('page-id', 'update-category')
 
 @section('content')
-<div class="dashboard">
-    <div class="grid-x expanded">
-        <h2>Product Category</h2>
-    </div>
 
-    <div class="grid-x grid-padding-x">
-        <div class="small-12 medium-3 cell">
-            <form action="" method="POST">
-                <div class="input-group">
-                    <input type="text" class="input-group-field" placeholder="Search by name">
-                    <div class="input-group-button">
-                        <button type="submit" class="button">Search</button>
+<div class="m-8">
+    <h3 class="font-normal">Product Category</h3>
+
+    <div class="my-8">
+        <div class="flex">
+            <div class="w-1/4">
+                <form action="" method="POST" class="flex">
+                    <input type="text" class="input" placeholder="Search by name">
+                    <button type="submit" class="btn">Search</button>
+                </form>
+            </div>
+            <div class="ml-auto w-2/3">
+                <form action="/admin/products/categories" method="POST">
+                    <div class="flex">
+                        <input type="hidden" name="token" value="{{\App\Classes\CSRFToken::_token()}}">
+                        <div class="w-1/3">
+                            <input type="text" name="name" class="input" placeholder="Category name">
+                        </div>
+                        <div class="relative w-1/4">
+                            <select class="input bg-white" name="parent_id">
+                                <option value="NULL" selected>Parent category</option>
+                                @foreach ($categories as $category)
+                                    <option value="{{$category['id']}}">{{$category['name']}}</option>
+                                @endforeach
+                            </select>
+                            <div class="pointer-events-none absolute pin-y pin-r flex items-center px-2 text-grey-darker">
+                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                            </div>
+                        </div>
+                        <button class="btn" type="submit">Create</button>
                     </div>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
-        <div class="small-12 medium-8 cell">
-            <form action="/admin/products/categories" method="POST">
-                <div class="input-group">
-                    <input type="hidden" name="token" value="{{\App\Classes\CSRFToken::_token()}}">
-                    <input type="text" name="name" class="input-group-field" placeholder="Category name">
-                    <input type="number" name="parent_id" class="input-group-field" value="0" placeholder="Parent id">
-                    <div class="input-group-button">
-                        <button class="button" type="submit">Create</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-        <div class="small-12 medium-11">
-            <table class="hover">
-                <thead>
+
+        <div class="mt-12">
+            <table class="w-full">
+                <thead class="text-left bg-grey-light">
                     <tr>
-                        <th>ID</th>
+                        <th class="p-4">ID</th>
                         <th>Category name</th>
                         <th>Created at</th>
                         <th></th>
@@ -45,30 +53,13 @@
                 <tbody>
                     @foreach ($categories as $category)
                     <tr>
-                        <td>{{$category['id']}}</td>
+                        <td width="80" class="p-4">{{$category['id']}}</td>
                         <td>{{$category['name']}}</td>
                         <td>{{$category['added']}}</td>
-                        <td width="100" class="text-right">
-                            <a data-open="item-{{$category['id']}}">
-                                <i class="fas fa-edit"></i>
-                            </a>
-                            <form action="/admin/products/categories/{{$category['id']}}" method="POST">
-                                <input type="hidden" value="{{\App\Classes\CSRFToken::_token()}}">
-                                <button type="submit">
-                                    <i class="fas fa-times"></i>
-                                </button>
-                            </form>
-                            <div class="reveal" id="item-{{$category['id']}}" data-reveal>
-                              <h3>Edit category</h3>
-                              <form class="update-category" data-token="{{\App\Classes\CSRFToken::_token()}}" data-id="{{$category['id']}}">
-                                  <div class="input-group">
-                                        <input type="text" name="name" id="category-name" class="input-group-field" value="{{$category['name']}}">
-                                        <input type="number" name="parent_id" id="parent-category-id" class="input-group-field" value="">
-                                        <div class="input-group-button">
-                                            <button class="button" type="submit" >Update</button>
-                                        </div>
-                                  </div>
-                              </form>
+                        <td width="100">
+                            <div class="flex justify-end mr-4">
+                                <update-category :categories="{{json_encode($categories)}}" :selected-category="{{json_encode($category)}}" :token="{{json_encode(\App\Classes\CSRFToken::_token())}}"></update-category>
+                                <delete-category :category="{{json_encode($category)}}" :token="{{json_encode(\App\Classes\CSRFToken::_token())}}"></delete-category>
                             </div>
                         </td>
                     </tr>

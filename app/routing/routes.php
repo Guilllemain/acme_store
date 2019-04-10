@@ -12,3 +12,4 @@ $router->map('POST', '/admin', 'App\Controllers\Admin\DashboardController@store'
 $router->map('GET', '/admin/products/categories', 'App\Controllers\Admin\ProductCategoryController@index', 'product_category');
 $router->map('POST', '/admin/products/categories', 'App\Controllers\Admin\ProductCategoryController@store', 'product_category_create');
 $router->map('POST', '/admin/products/categories/[i:id]/update', 'App\Controllers\Admin\ProductCategoryController@update', 'product_category_update');
+$router->map('POST', '/admin/products/categories/[i:id]/delete', 'App\Controllers\Admin\ProductCategoryController@destroy', 'product_category_destroy');

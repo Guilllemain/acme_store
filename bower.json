@@ -2,7 +2,6 @@
   "name": "acme-store",
   "dependencies": {
     "foundation-sites": "^6.5.3",
-    "motion-ui": "^2.0.3",
-    "slick-carousel": "^1.8.1"
+    "motion-ui": "^2.0.3"
   }
 }

@@ -45,7 +45,7 @@ if (!function_exists('dd')) {
 function paginate($num_of_records, $total_records, $table_name, $object) {
     $pages = new Paginator($num_of_records, 'p');
     $pages->set_total($total_records);
-    $data = Capsule::select("SELECT * FROM $table_name ORDER BY created_at DESC  " . $pages->get_limit());
+    $data = Capsule::select("SELECT * FROM $table_name WHERE deleted_at IS NULL ORDER BY created_at DESC  " . $pages->get_limit());
     $items = $object->transform($data);
     
     return [$items, $pages->page_links()]; 

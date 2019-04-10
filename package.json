@@ -14,14 +14,20 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.18.0",
     "laravel-mix": "^4.0.15",
+    "slick-carousel": "^1.8.1",
+    "vue": "^2.6.10",
     "webpack": "^4.29.6"
   },
   "devDependencies": {
+    "browser-sync": "^2.26.3",
+    "browser-sync-webpack-plugin": "^2.0.1",
     "cross-env": "^5.2.0",
     "resolve-url-loader": "^2.3.1",
     "sass": "^1.17.3",
     "sass-loader": "^7.1.0",
+    "tailwindcss": "^0.7.4",
     "vue-template-compiler": "^2.6.10"
   }
 }

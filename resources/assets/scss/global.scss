@@ -1,0 +1,12 @@
+.reveal {
+    border: none;
+    border-radius: .5rem;
+
+    &:focus {
+        outline-style: none;
+    }
+}
+
+.fa-times {
+    color: orangered;
+}

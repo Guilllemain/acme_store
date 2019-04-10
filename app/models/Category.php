@@ -23,6 +23,7 @@ class Category extends Model
                 'id' => $item->id,
                 'name' => $item->name,
                 'slug' => $item->slug,
+                'parent_id' => $item->parent_id,
                 'added' => $added->toFormattedDateString()
             ]);
         }     
