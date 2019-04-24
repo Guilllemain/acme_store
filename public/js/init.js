@@ -17249,35 +17249,12 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
-/* harmony import */ var _components_DeleteCategory_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/DeleteCategory.vue */ "./resources/assets/js/components/DeleteCategory.vue");
-/* harmony import */ var _components_UpdateCategory_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/UpdateCategory.vue */ "./resources/assets/js/components/UpdateCategory.vue");
 
-
-
+vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('delete-category', __webpack_require__(/*! ./components/DeleteCategory.vue */ "./resources/assets/js/components/DeleteCategory.vue").default);
+vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('update-category', __webpack_require__(/*! ./components/UpdateCategory.vue */ "./resources/assets/js/components/UpdateCategory.vue").default);
 var app = new vue__WEBPACK_IMPORTED_MODULE_0__["default"]({
-  el: '#app',
-  components: {
-    DeleteCategory: _components_DeleteCategory_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
-    UpdateCategory: _components_UpdateCategory_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
-  }
+  el: '#app'
 });
-
-(function () {
-  'use strict';
-
-  document.addEventListener('DOMContentLoaded', function () {
-    var id = document.body.dataset.id;
-
-    switch (id) {
-      case 'update-category':
-        break;
-
-      default:
-        console.log('no');
-        break;
-    }
-  });
-})();
 
 /***/ }),
 
@@ -17299,8 +17276,8 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_0__["default"]({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/yguillemain/code/acme/resources/assets/js/init.js */"./resources/assets/js/init.js");
-module.exports = __webpack_require__(/*! /Users/yguillemain/code/acme/resources/assets/scss/app.scss */"./resources/assets/scss/app.scss");
+__webpack_require__(/*! /Users/yann/code/acme/resources/assets/js/init.js */"./resources/assets/js/init.js");
+module.exports = __webpack_require__(/*! /Users/yann/code/acme/resources/assets/scss/app.scss */"./resources/assets/scss/app.scss");
 
 
 /***/ })
