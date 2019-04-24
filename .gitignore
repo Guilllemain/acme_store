@@ -4,3 +4,4 @@ bootstrap/cache
 resources/assets/bower
 resources/assets/css
 .env
+public/js
