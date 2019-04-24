@@ -11,8 +11,8 @@
     <div class="my-8">
         <div class="flex">
             <div class="w-1/4">
-                <form action="" method="POST" class="flex">
-                    <input type="text" class="input" placeholder="Search by name">
+                <form action="/admin/products/categories/search" method="GET" class="flex">
+                    <input type="text" class="input" name="search" placeholder="Search by name">
                     <button type="submit" class="btn">Search</button>
                 </form>
             </div>
@@ -43,7 +43,7 @@
         <div class="mt-12">
             <table class="w-full">
                 <thead class="text-left bg-grey-light">
-                    <tr>
+                    <tr class="border border-grey-light">
                         <th class="p-4">ID</th>
                         <th>Category name</th>
                         <th>Created at</th>
@@ -52,7 +52,7 @@
                 </thead>
                 <tbody>
                     @foreach ($categories as $category)
-                    <tr>
+                    <tr class="border border-grey-light">
                         <td width="80" class="p-4">{{$category['id']}}</td>
                         <td>{{$category['name']}}</td>
                         <td>{{$category['added']}}</td>

@@ -23,6 +23,8 @@ export default {
         async deleteCategory() {
             const response = await axios.post(`http://acme.test/admin/products/categories/${this.category.id}/delete`, qs.stringify({
                 token: this.token,
+                name: this.category.name,
+                parent_id: this.category.parent_id
             }))
         }
     }

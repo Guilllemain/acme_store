@@ -1818,7 +1818,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 _context.next = 2;
                 return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("http://acme.test/admin/products/categories/".concat(this.category.id, "/delete"), qs__WEBPACK_IMPORTED_MODULE_2___default.a.stringify({
-                  token: this.token
+                  token: this.token,
+                  name: this.category.name,
+                  parent_id: this.category.parent_id
                 }));
 
               case 2:
@@ -1957,8 +1959,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   props: {
     categories: {
-      required: true,
-      type: Array
+      required: true
     },
     selectedCategory: {
       required: true,
@@ -1971,12 +1972,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   data: function data() {
     return {
-      isModalOpen: false
+      isModalOpen: false,
+      category: {
+        name: this.selectedCategory.name,
+        parent_id: this.selectedCategory.parent_id
+      }
     };
   },
   methods: {
-    deleteCategory: function () {
-      var _deleteCategory = _asyncToGenerator(
+    updateCategory: function () {
+      var _updateCategory = _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
         var response;
@@ -1985,14 +1990,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("http://acme.test/admin/products/categories/".concat(this.category.id, "/delete"), qs__WEBPACK_IMPORTED_MODULE_2___default.a.stringify({
-                  token: this.token
+                return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("http://acme.test/admin/products/categories/".concat(this.selectedCategory.id, "/update"), qs__WEBPACK_IMPORTED_MODULE_2___default.a.stringify({
+                  token: this.token,
+                  name: this.category.name,
+                  parent_id: this.category.parent_id
                 }));
 
               case 2:
                 response = _context.sent;
+                this.isModalOpen = false;
 
-              case 3:
+              case 4:
               case "end":
                 return _context.stop();
             }
@@ -2000,11 +2008,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee, this);
       }));
 
-      function deleteCategory() {
-        return _deleteCategory.apply(this, arguments);
+      function updateCategory() {
+        return _updateCategory.apply(this, arguments);
       }
 
-      return deleteCategory;
+      return updateCategory;
     }()
   }
 });
@@ -4770,59 +4778,117 @@ var render = function() {
               _vm._v("Edit category")
             ]),
             _vm._v(" "),
-            _c("form", { staticClass: "flex flex-col" }, [
-              _c(
-                "label",
-                { staticClass: "mb-2 block", attrs: { for: "name" } },
-                [_vm._v("Category name")]
-              ),
-              _vm._v(" "),
-              _c("input", {
-                staticClass: "input mb-6",
-                attrs: { type: "text", name: "name" },
-                domProps: { value: _vm.selectedCategory.name }
-              }),
-              _vm._v(" "),
-              _c(
-                "label",
-                { staticClass: "mb-2 block", attrs: { for: "parent_id" } },
-                [_vm._v("Parent category")]
-              ),
-              _vm._v(" "),
-              _c(
-                "select",
-                { staticClass: "input bg-white", attrs: { name: "parent_id" } },
-                [
-                  !_vm.selectedCategory.parent_id
-                    ? _c("option", [_vm._v("Select a parent category")])
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _vm._l(_vm.categories, function(category) {
-                    return _c(
-                      "option",
+            _c(
+              "form",
+              {
+                staticClass: "flex flex-col",
+                on: {
+                  submit: function($event) {
+                    $event.preventDefault()
+                    return _vm.updateCategory($event)
+                  }
+                }
+              },
+              [
+                _c(
+                  "label",
+                  { staticClass: "mb-2 block", attrs: { for: "name" } },
+                  [_vm._v("Category name")]
+                ),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.category.name,
+                      expression: "category.name"
+                    }
+                  ],
+                  staticClass: "input mb-6",
+                  attrs: { type: "text", name: "name" },
+                  domProps: { value: _vm.category.name },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.category, "name", $event.target.value)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c(
+                  "label",
+                  { staticClass: "mb-2 block", attrs: { for: "parent_id" } },
+                  [_vm._v("Parent category")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "select",
+                  {
+                    directives: [
                       {
-                        key: category.id,
-                        domProps: {
-                          value: category.id,
-                          selected:
-                            category.id === _vm.selectedCategory.parent_id
-                              ? "selected"
-                              : false
-                        }
-                      },
-                      [_vm._v(_vm._s(category.name))]
-                    )
-                  })
-                ],
-                2
-              ),
-              _vm._v(" "),
-              _c(
-                "button",
-                { staticClass: "btn mt-4", attrs: { type: "submit" } },
-                [_vm._v("Update")]
-              )
-            ])
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.category.parent_id,
+                        expression: "category.parent_id"
+                      }
+                    ],
+                    staticClass: "input bg-white",
+                    attrs: { name: "parent_id" },
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.$set(
+                          _vm.category,
+                          "parent_id",
+                          $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        )
+                      }
+                    }
+                  },
+                  [
+                    !_vm.selectedCategory.parent_id
+                      ? _c("option", [_vm._v("Select a parent category")])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm._l(_vm.categories, function(category) {
+                      return _c(
+                        "option",
+                        {
+                          key: category.id,
+                          domProps: {
+                            value: category.id,
+                            selected:
+                              category.id === _vm.selectedCategory.parent_id
+                                ? "selected"
+                                : false
+                          }
+                        },
+                        [_vm._v(_vm._s(category.name))]
+                      )
+                    })
+                  ],
+                  2
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  { staticClass: "btn mt-4", attrs: { type: "submit" } },
+                  [_vm._v("Update")]
+                )
+              ]
+            )
           ])
         ]
       )

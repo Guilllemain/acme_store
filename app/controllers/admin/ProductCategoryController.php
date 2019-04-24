@@ -80,12 +80,12 @@ class ProductCategoryController
         if (!CSRFToken::verifyCSRFToken($request->token)) {
             throw new \Exception("Token mismatch");
         }
-
         $name = $request->name;
-        $parentId = $request->parentId === '0' ? null : $request->parentId;
+        $parent_id = $request->parent_id === '0' ? null : $request->parent_id;
         Category::where('id', $id)->update([
             'name' => $name,
-            'slug' => strtolower(str_replace(' ', '-', $name))
+            'slug' => strtolower(str_replace(' ', '-', $name)),
+            'parent_id' => $parent_id
         ]);
         echo json_encode(['success' => 'Category updated']);
     }
@@ -95,13 +95,28 @@ class ProductCategoryController
         if (!Request::has('post')) return;
 
         $request = Request::get('post');
-
+        $categories = Category::where('parent_id', $id)->get();
+        if (count($categories)) {
+            foreach ($categories as $category) {
+                $sub_categories = Category::where('parent_id', $category->id)->get();
+                if(count($sub_categories)) {
+                    foreach ($sub_categories as $sub_category) {
+                        $sub_category->delete();
+                    }
+                }
+                $category->delete();
+            };
+        }
+        
         if (!CSRFToken::verifyCSRFToken($request->token)) {
             dd('error');
             throw new \Exception("Token mismatch");
         }
 
         Category::destroy($id);
+
+        
+
         echo json_encode(['success' => 'Category destroyed']);
     }
 }
