@@ -9,28 +9,40 @@
     <h3 class="font-normal">Add Product</h3>
 
     <div class="my-8">
-        <form action="/admin/products/create" method="POST">
+        <form action="/admin/products/create" method="POST" enctype="multipart/form-data">
             <input type="hidden" name="token" value="{{\App\Classes\CSRFToken::_token()}}">
-            <div>
-                <label for="name">Name</label>
-                <input class="input" type="text" name="name" value="{{\App\Classes\Request::old('post', 'name')}}">
-            </div>
-            <div class="relative">
-                <label for="category">Category</label>
-                <select class="input bg-white" name="parent_id">
-                <option value="NULL" selected value="{{\App\Classes\Request::old('post', 'category') ?: ''}}">{{\App\Classes\Request::old('post', 'category') ?: 'Select a category'}}</option>
-                    @foreach ($categories as $category)
-                        <option value="{{$category['id']}}">{{$category['name']}}</option>
-                    @endforeach
-                </select>
-                <div class="pointer-events-none absolute pin-y pin-r flex items-center px-2 text-grey-darker">
-                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+            <div class="flex mb-5">
+                <div class="w-1/4">
+                    <div>
+                        <label for="name">Name</label>
+                        <input class="input" type="text" name="name" value="{{\App\Classes\Request::old('post', 'name')}}">
+                    </div>
+                    <div class="flex mt-5">
+                        <div class="w-32 mr-8">
+                            <label for="price">Price</label>
+                            <input class="input" type="number" name="price" value="{{\App\Classes\Request::old('post', 'price')}}">
+                        </div>
+                        <div class="w-32">
+                            <label for="stock">Stock</label>
+                            <input class="input" type="number" name="stock" value="{{\App\Classes\Request::old('post', 'stock')}}">
+                        </div>
+                    </div>
+                </div>
+                <select-category :categories="{{json_encode($categories)}}" :category_id="{{\App\Classes\Request::old('post', 'category_id')}}"></select-category>
+                <div>
+                    <label for="image">Image</label>
+                    <input class="input" type="file" name="image">
                 </div>
             </div>
+            
+            
             <div>
-                <label for="price">Price</label>
-                <input class="input" type="number" name="price" value="{{\App\Classes\Request::old('post', 'price')}}">
+                <label for="description">Description</label>
+                <textarea class="input" name="description" rows="3">
+                    {{\App\Classes\Request::old('post', 'description')}}
+                </textarea>
             </div>
+            <button class="btn mt-4">Create</button>
         </form>
     </div>
 </div>

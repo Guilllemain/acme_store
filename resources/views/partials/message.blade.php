@@ -1,30 +1,19 @@
-<div class="row expanded">
+<div class="bg-red-light p-6">
     @isset($errors)
         @if(count($errors))
-            <div class="callout alert" data-closable>
+            <div class="">
                 @foreach ($errors as $error_array)
                     @foreach($error_array as $error)
                         {{$error}}
                     @endforeach
                 @endforeach
-                <button class="close-button" aria-label="Dismiss message" data-close>
-                    <span arial-hidden="true">&times;</span>
-                </button>
             </div>
         @endif
     @endisset
 
     @isset($success)
-        <div class="callout success" data-closable>
+        <div class="">
              {{$success}}
-            <button class="close-button" aria-label="Dismiss message" data-close>
-                <span arial-hidden="true">&times;</span>
-            </button>
         </div>
     @endisset
-
-    <div class="notifications callout" style="display: none" data-closable><button class="close-button" aria-label="Dismiss message" data-close>
-            <span arial-hidden="true">&times;</span>
-        </button>
-    </div>
 </div>

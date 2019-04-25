@@ -56,12 +56,12 @@ class UploadFile
         return $this->path;
     }
 
-    public static function move($temp_path, $folder, $file, $new_filename)
+    public static function move($temp_path, $folder, $filename, $new_filename = '')
     {
         $fileObj = new static;
         $ds = DIRECTORY_SEPARATOR;
 
-        $fileObj->setFilename($file, $new_filename);
+        $fileObj->setFilename($filename, $new_filename);
         $filename = $fileObj->getFilename();
 
         if (!is_dir($folder)) {
